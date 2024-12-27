@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website</title>
+    <style>
+        
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .form-container, .product-container, .cart, .contact, .about {
+            display: none;
+        }
+
+        .form-container, .product-container {
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #555;
+        }
+
+
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .product {
+            width: 250px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product h3 {
+            margin-top: 10px;
+        }
+
+        .product p {
+            margin-top: 5px;
+        }
+
+        .product button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition:background-color 0.3s ease,color 0.3s ease;
+        }
+        .product button:hover {
+            background-color: #566f72;
+            color: #16abd8;
+    
+           
+        }
+        
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+
+        .cart-item {
+            margin-bottom: 5px;
+        }
+        .cart button {
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart button:hover {
+            background-color: #218838;
+        }
+
+        .close-btn {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .close-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        
+
+
+        .total {
+            font-weight: bold;
+        }
+        .contact ,.about{
+            display: none;
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
+        .contact h2 ,.about h2{
+            margin-top: 0;
+        }
+
+        .contact p {
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            float: right;
+        }
+        .close-btn : :hover{
+            background-color: #555;
+           
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <header>
+        <a href="#" class="logo"> My E-Commerce</a>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#" onclick="showShopForm()">Shop</a></li>
+
+                <li><a href="#" onclick="showAbout()">About</a></li>
+
+                <li><a href="#" onclick="showContact()">Contact</a></li>
+
+                <li><a href="#" onclick="toggleCart()">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="form-container" id="shop-form">
+        <h2>Enter Your Details</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" placeholder="Enter your phone number" required>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" placeholder="Enter your address" required>
+        
+        <button onclick="proceedToShop()">Proceed to Shop</button>
+    </div>
+
+
+    <div class="product-container">
+        <div class="product">
+            <img src="c:\Users\vaish\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\E820A45F1DFC7B95282D10B6087E11C0\WhatsApp Image 2024-12-26 at 19.56.00_8bc440e0.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>$29.99</p>
+            <button onclick="addToCart(0)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\vaish\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\5D616DD38211EBB5D6EC52986674B6E4\WhatsApp Image 2024-12-26 at 22.06.40_500b91c6.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>$19.99</p>
+            <button onclick="addToCart(1)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\vaish\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\801C14F07F9724229175B8EF8B4585A8\WhatsApp Image 2024-12-26 at 22.37.47_22f863f1.jpg">
+            <h3>Product 3</h3>
+            <p>$39.99</p>
+            <button onclick="addToCart(2)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\vaish\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\DC58E3A306451C9D670ADCD37004F48F\WhatsApp Image 2024-12-26 at 22.22.52_8ec0b144.jpg">
+            <h3>Product 4</h3>
+            <p>$10.99</p>
+            <button onclick="addToCart(3)">Add to Cart</button>
+        </div>
+        </div>
+
+    <div class="cart">
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <p class="total">Total: $<span id="cart-total">0.00</span></p>
+    </div>
+    <div class="cart" id="cart">
+        <button class="close-btn" onclick="toggleCart()">Close</button>
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <p class="total">Total: $<span id="cart-total">0.00</span></p>
+        <button onclick="buyNow()">Buy</button>
+    </div>
+
+    <div class="contact">
+        <button class="close-btn" onclick="closeContact()">Close</button>
+        <h2>Contact Us</h2>
+        <p><strong>Email:</strong> myE-Commerceecec@gmail.com</p>
+        <p><strong>Phone:</strong> 9876543210</p>
+        <p><strong>Address:</strong> 3/171, My E-commerce shop, cross-cut road, Coimbatore, India</p>
+    </div>
+    <div class="about">
+        <button class="close-btn" onclick="closeAbout()">Close</button>
+        <h2>About Us</h2>
+        <p>Welcome to My E-Commerce! We are dedicated to bring you the best shopping experience online.</p>
+        <p>Our mission is to provide high-quality products at affordable prices. With a wide selection of items, you’re sure to find what you’re looking for!</p>
+        <p>Thank you for choosing us as your trusted shopping partner.</p>
+    </div>
+
+
+
+    <script>
+        const cart = [];
+        const productPrices = [29.99, 19.99, 39.99, 10.99];
+        const productNames = ["Product 1", "Product 2", "Product 3", "Product 4"];
+
+        function addToCart(productId) {
+            cart.push(productId);
+            updateCart();
+        }
+        function removeFromeCart(index)
+        {
+            cart.splice(index,1);
+            updateCart();
+
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(productId => {
+                const productName = productNames[productId];
+                const productPrice = productPrices[productId];
+                total += productPrice;
+
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        ${productName} - $${productPrice.toFixed(2)}
+                    </div>
+                `;
+               
+            });
+
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+           
+        function toggleCart() {
+            const cartElement = document.querySelector('.cart');
+            
+            cartElement.style.display = cartElement.style.display === 'block' ? 'none' : 'block';
+        }
+        function showContact() {
+            document.querySelector('.contact').style.display = 'block';
+        }
+        function showShopForm() {
+            document.getElementById('shop-form').style.display = 'block';
+            document.getElementById('shop').style.display = 'none';
+        }
+
+        function proceedToShop() {
+            document.getElementById('shop-form').style.display = 'none';
+            document.getElementById('shop').style.display = 'flex';
+        }
+
+
+        function closeContact() {
+            document.querySelector('.contact').style.display = 'none';
+        }
+        function showAbout() {
+            document.querySelector('.about').style.display = 'block';
+        }
+
+        function closeAbout() {
+            document.querySelector('.about').style.display = 'none';
+        }
+
+
+    </script>
+</body>
+</html>
